@@ -1,0 +1,16 @@
+services:
+  - type: worker
+    name: loup-garou-discord
+    runtime: python
+    plan: starter
+    buildCommand: pip install .
+    startCommand: python -m loupgarou.bot
+    disk:
+      name: werewolf-data
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: DISCORD_TOKEN
+        sync: false
+      - key: WEREWOLF_DATABASE
+        value: /var/data/werewolf.sqlite3
